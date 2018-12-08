@@ -258,3 +258,5 @@ return 'hi';
 
 }
 ```
+
+_interopRequireDefault这个函数的意思是如果载入的模块是由 ES2015 输出的，那么不做任何处理，否则会生成一个输入模块的拷贝，并且设置其default属性为自身。
