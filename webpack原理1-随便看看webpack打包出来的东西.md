@@ -1,4 +1,5 @@
 ### webpack原理1
+![](https://github.com/variinlkt/blog/blob/master/mind%20map/webpack%20bundle.png)
 
 首先我先看了下webpack打包出来的东西
 
