@@ -41,7 +41,7 @@ webpack编译后：
 })({});
 ```
 
-
+要注意的是，这个iife跟网上大部分日志总结的不太一样，传入的是一个对象而不是数组
 Iife内部有一个__webpack_require__函数：
 
 
@@ -259,4 +259,39 @@ return 'hi';
 }
 ```
 
-_interopRequireDefault这个函数的意思是如果载入的模块是由 ES2015 输出的，那么不做任何处理，否则会生成一个输入模块的拷贝，并且设置其default属性为自身。
+_interopRequireDefault这个函数的意思是：对载入的非 ES2015 模块做了处理，会返回一个default属性指向该模块的新对象。
+
+#### __webpack_require__属性挂载
+
+```
+// 模块数组
+__webpack_require__.m = modules;
+// 模块缓存
+__webpack_require__.c = installedModules;
+// 属性判断
+__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+// 如果不存在对应属性 定义输出的getter
+__webpack_require__.d = function(exports, name, getter) {
+    if (!__webpack_require__.o(exports, name)) {
+        Object.defineProperty(exports, name, {
+            configurable: false,
+            enumerable: true,
+            get: getter
+        });
+    }
+};
+// 默认模块
+__webpack_require__.n = function(module) {
+//module的引入模块有两种输出模式，一种是webpack定义的module.exports，另一种是ES定义的export default，这里就是判断是哪一种方式。
+//默认情况下当然是module.exports获取模块输出内容。但是用ES的方式，模块输出会被包裹在一个default对象，此时需要用module['default']来获取。
+    var getter = module && module.__esModule ?
+        function getDefault() { return module['default']; } :
+        function getModuleExports() { return module; };
+    __webpack_require__.d(getter, 'a', getter);
+    return getter;
+};
+// __webpack_public_path__
+__webpack_require__.p = "";
+```
+
+
