@@ -293,3 +293,10 @@ const baseUrl = req ? `${req.protocol}://${req.get('Host')}` : '';
 
 await fetch（baseUrl+query）
 ```
+
+正确的做法是写在componentDidMount中
+
+### 其他的坑
+#### 关于nextjs编译出来的html结构classname错位的问题
+
+注意html结构是否有a标签嵌套div标签的情况，nextjs貌似不能正确解析这种html的嵌套结构，因此会出现报错或上一个组件的classname解析到下一个组件里面，导致classname对应的css不能正确地渲染到对应元素上
