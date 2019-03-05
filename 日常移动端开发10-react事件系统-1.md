@@ -90,7 +90,7 @@ document.body.addEventListener('click',e=>{
 
 然后我去看了下react源码，大概的实现原理是：
 
-**react将props解析成react event ，利用l了registrationNameDependencies——一个存储了 React事件名与浏览器原生事件名对应的一个 Map，可以通过这个 map拿到相应的浏览器原生事件名，再注册原生事件**
+**react将props解析成react event ，利用了registrationNameDependencies——一个存储了 React事件名与浏览器原生事件名对应的一个 Map，可以通过这个 map拿到相应的浏览器原生事件名，再注册原生事件**
 
 ## 事件系统
 1、使用事件委托技术进行事件代理，React 组件上声明的事件最终都转化为 DOM 原生事件，绑定到了 document 这个 DOM 节点上。从而减少了内存开销。
@@ -122,7 +122,28 @@ document.body.addEventListener('click',e=>{
 #### ReactDomComponent.js
 
 使用 putListener 方法来进行事件回调存储。
-![](https://dfiles.tita.com/Portal/110006/2e048d9c42c544a4bd72843101fc9b23.png)
+
+```
+var listenerBank = {};
+var getDictionaryKey = function (inst) {
+//inst为组建的实例化对象
+//_rootNodeID为组件的唯一标识
+  return '.' + inst._rootNodeID;
+}
+var EventPluginHub = {
+//inst为组建的实例化对象
+//registrationName为事件名称
+//listner为我们写的回调函数，也就是列子中的this.autoFocus
+  putListener: function (inst, registrationName, listener) {
+    ...
+    var key = getDictionaryKey(inst);
+    var bankForRegistrationName = listenerBank[registrationName] || (listenerBank[registrationName] = {});
+    bankForRegistrationName[key] = listener;
+    ...
+  }
+}
+```
+
 #### 事件存储总结
 将事件的回调函数放入listenerbank中
 
@@ -191,3 +212,9 @@ forEachAccumulated这个函数，就是对数组processingEventQueue的每一个
 1、用EventPluginHub生成合成事件，同一事件类型只会生成一个合成事件，里面的_dispatchListeners里储存了同一事件类型的所有回调函数
 
 2、按顺序去执行它
+
+## 总总结：
+### listenerBank、registrationNameDependencies和event._dispatchListeners的区别？
+listenerbank是一个对象，存储了单个react事件的回调函数
+event._dispatchListeners是一个数组，存储了同一类型事件 的所有回调函数，在dispatch时按顺序执行他们
+registrationNameDependencies是一个存储了 React事件名与浏览器原生事件名对应的一个 Map
