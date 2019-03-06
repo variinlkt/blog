@@ -214,6 +214,8 @@ forEachAccumulated这个函数，就是对数组processingEventQueue的每一个
 2、按顺序去执行它
 
 ## 总总结：
+### 流程图
+![](https://github.com/variinlkt/blog/blob/master/imgs/2582771838-59cdeeb8f2084_articlex.jpeg)
 ### listenerBank、registrationNameDependencies和event._dispatchListeners的区别？
 listenerbank是一个对象，存储了单个react事件的回调函数
 event._dispatchListeners是一个数组，存储了同一类型事件 的所有回调函数，在dispatch时按顺序执行他们
