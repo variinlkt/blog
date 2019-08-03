@@ -281,9 +281,9 @@ webpack.config.js中这样配置即可
 
 
 ```
-entry: {
-    app: ['babel-polyfill','./main.js']
-  }
+module.exports = {
+  entry: ["@babel/polyfill", "./app/js"],
+};
 ```
 
 
