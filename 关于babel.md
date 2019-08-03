@@ -274,7 +274,7 @@ babel-polyfill 是为了模拟一个完整的ES2015+环境，旨在用于应用�
 
 
 ```
-npm install babel-polyfill --save
+npm install @babel/polyfill --save
 ```
 
 webpack.config.js中这样配置即可
@@ -479,7 +479,7 @@ babel-register模块改写require命令，为它加上一个钩子。此后，�
 如果某些代码需要调用Babel的API进行转码，就要使用@babel/core模块
 
 ```
- var babel = require('babel-core');
+ var babel = require('@babel/core');
  
  // 字符串转码
  babel.transform('code();', options);
