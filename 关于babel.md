@@ -522,9 +522,8 @@ var es6Code = 'let x = n => n + 1';
 
     - 转换promise等和内置对象原型上的方法，但是不能按需引入，一引就引全部
 
-    但是可以通过env配置{useBuiltIns: 'usage'}来实现按需引入，但是对于原型链上的方法仅仅按照方法名去匹配，
+    但是可以通过env配置{useBuiltIns: 'usage'}来实现按需引入，但是对于原型链上的方法仅仅按照方法名去匹配
 
-    【这里我的想法是或许7.4.0以上配置corejs：3也可以做到跟runtime一样的效果，待证实】；
     - 会污染全局变量；
 - babel-runtime：可以按需引入polyfill；防止babel帮助函数在多个文件中重复声明；防止全局变量污染
 
