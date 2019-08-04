@@ -285,7 +285,7 @@ module.exports = {
   entry: ["@babel/polyfill", "./app/js"],
 };
 ```
-
+【此处有大佬指正：这样配置并不好，业务层、编译层一定要分离开】
 
 ### @babel/plugin-transform-runtime
 存在的意义是：
