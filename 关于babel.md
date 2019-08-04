@@ -10,7 +10,7 @@
 ## config配置
 在babel7中，除了可以用.babelrc文件配置，还可以用babel.config.js文件进行配置.
 
-两种配置是平行的，可以同时使用（但是看到网上有人说并不）【待验证】
+两种配置是平行的，可以同时使用
 
 ### .babelrc ——文件相对配置
 通过搜索，Babel 加载 .babelrc文件，目录结构从正在编译的 "filename" 开始
@@ -397,7 +397,8 @@ function foo() {
 ```
 #### runtime怎么做到不污染全局变量的
 
-我觉得吧就是因为设置了{corejs：2}，为代码创建一个沙盒环境，为 core-js 提供假名，这样就做到了不污染全局空间。【待验证】
+我觉得吧就是因为设置了{corejs：2}，为代码创建一个沙盒环境，为 core-js 提供假名，这样就做到了不污染全局空间。<s>【待验证】</s>
+【已验证】在没有设置corejs时runtime并没有生效，es6的方法并没有转换，只有在设置了corejs后才有效，demo见:https://github.com/variinlkt/babel-demo
 
 
 
@@ -539,7 +540,8 @@ var es6Code = 'let x = n => n + 1';
 - Babel >= 7.4.0：
 
     = @babel/runtime+corejs：3
-
+## demo
+https://github.com/variinlkt/babel-demo
 ## 参考
 https://juejin.im/post/5b07e79b51882538914a6039
 
