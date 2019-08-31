@@ -7,8 +7,10 @@ react hooks 是react 16.8引入的新特性
 当我们需要在组件的某些特定时间做一些业务逻辑处理时，需要在对应的生命周期中处理逻辑；而react hooks只能用于函数式组件，它能让用户专注于业务逻辑而无需分心思考业务逻辑需要放在哪个生命周期函数中。同时也极大地减少了代码长度。
 ### 没有this
 为什么没有this也是优点呢？请看以下代码，function component和class component有什么区别呢？
-
+![](https://github.com/variinlkt/blog/blob/master/imgs/class%20cmp.png)
+![](https://github.com/variinlkt/blog/blob/master/imgs/func%20cmp.png)
 梳理一下逻辑，用户点击按钮，三秒后会弹出一个弹框，输出传入该组件的user
+
 当传入的props在这三秒中发生了变化，function component和class component的输出会有什么变化呢？
 
 答案就是：function component会输出点击时传入的user值，class component会输出变化后的user值。
@@ -66,10 +68,13 @@ const App = React.createClass({
 
 ```
 Mouse 组件接受一个类型为函数的render props，然后在render中调用该方法，并将自身的state作为参数，这样，其他组件就能到Mouse的状态，并渲染想要的内容。并且我们注意到，组合是发生在render中的，也就是说在运行态下的动态组合，我们就可以用到原组件内部的任何state 或 props数据，以及生命周期函数等等。
-
-#### Hoc：缺点：多层嵌套
+![](https://github.com/variinlkt/blog/blob/master/imgs/renderprops.png)
+#### Hoc
 所谓HOC，就是指高阶组件，他的概念类似于高阶函数，只是这里接受一个组件作为参数，经过装饰之后，返回一个新的组件。装饰的过程，就是将可复用的逻辑，附加到原有的组件上，可以是组件结构的扩展，也可以是功能的扩充。
+![](https://github.com/variinlkt/blog/blob/master/imgs/hoc.png)
 
+缺点：多层嵌套
+![](https://github.com/variinlkt/blog/blob/master/imgs/hoc1.png)
 ## hooks原理
 闭包
 ```
